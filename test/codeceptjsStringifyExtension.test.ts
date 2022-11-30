@@ -59,6 +59,22 @@ describe('CodeceptJSStringifyExtension', () => {
     expect(writer.toString()).to.equal('I.click("#test")\n');
   });
 
+  test('should correctly exports change step', async function () {
+    const ext = new CodeceptjsStringifyExtension();
+    const step = {
+      type: StepType.Change as const,
+      target: 'main',
+      selectors: [['aria/Name'], ['#name']],
+      value: 'jane',
+    };
+    const flow = { title: 'change step', steps: [step] };
+
+    const writer = new InMemoryLineWriter('  ');
+    await ext.stringifyStep(writer, step, flow);
+
+    expect(writer.toString()).to.equal('I.fillField("#name", "jane");\n');
+  });
+
   test('should correctly exports keyDown step', async () => {
     const ext = new CodeceptjsStringifyExtension();
     const step: Step = {

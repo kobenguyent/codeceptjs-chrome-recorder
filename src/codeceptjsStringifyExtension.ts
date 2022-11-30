@@ -56,6 +56,8 @@ export class CodeceptjsStringifyExtension extends PuppeteerStringifyExtension {
         return this.#appendNavigateStep(out, step);
       case StepType.Click:
         return this.#appendClickStep(out, step, flow);
+      case StepType.Change:
+        return this.#appendChangeStep(out, step, flow);
       case StepType.KeyDown:
         return this.#appendKeyDownStep(out, step);
       case StepType.KeyUp:
@@ -95,6 +97,14 @@ export class CodeceptjsStringifyExtension extends PuppeteerStringifyExtension {
       console.log(
         `Warning: The click on ${step.selectors} was not able to export to CodeceptJS. Please adjust selectors and try again`,
       );
+    }
+  }
+
+  #appendChangeStep(out: LineWriter, step: ChangeStep, flow: UserFlow): void {
+    const domSelector = this.getSelector(step.selectors, flow);
+
+    if (domSelector) {
+      out.appendLine(`I.fillField(${domSelector}, ${this.#formatAsJSLiteral(step.value)});`);
     }
   }
 
