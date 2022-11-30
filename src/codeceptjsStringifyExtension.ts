@@ -25,17 +25,10 @@ export class CodeceptjsStringifyExtension extends PuppeteerStringifyExtension {
   }
 
   async beforeAllSteps(out: LineWriter, flow: UserFlow): Promise<void> {
-    out.appendLine(
-      `Feature('${this.#formatAsJSLiteral(flow.title)}');
+    out.appendLine(`Feature('${this.#formatAsJSLiteral(flow.title)}');\n`)
+    out.appendLine(`Before(() => {
 
-      Before(() => {
-
-      });
-      
-      `,
-    );
-
-
+    });\n`)
     out.appendLine(
         `Scenario((${this.#formatAsJSLiteral(flow.title)}), async ({ I }) => {
           `,
