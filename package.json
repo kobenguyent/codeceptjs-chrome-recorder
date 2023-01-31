@@ -1,6 +1,6 @@
 {
   "name": "codeceptjs-chrome-recorder",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "description": "Generate CodeceptJS Tests from Google Chrome DevTools Recordings",
   "main": "dist/main.js",
   "files": [
