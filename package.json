@@ -53,5 +53,6 @@
     "meow": "^11.0.0",
     "prettier": "^2.7.1",
     "ts-jest": "^29.0.3"
-  }
+  },
+  "type": "module"
 }
